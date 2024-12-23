@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #080808;
+  color: #ffffff;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.neon-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00F3FF, transparent);
+}
+
+.cyber-grid {
+  background-image: linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
