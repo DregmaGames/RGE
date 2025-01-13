@@ -1,24 +1,35 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
-import HomePage from './pages/HomePage';
-import ServicesPage from './pages/ServicesPage';
-import ContactPage from './pages/ContactPage';
-import ExperiencePage from './pages/ExperiencePage';
-import { WhatsAppButton } from './components/ui/WhatsAppButton';
-import './styles/globals.css';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Services from './components/Services';
+import About from './components/About';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
+import { useAutoLanguage } from './hooks/useAutoLanguage';
+import { AuthProvider } from './contexts/AuthContext';
+import { ModalProvider } from './contexts/ModalContext';
 
-export default function App() {
+function App() {
+  useAutoLanguage();
+
   return (
-    <div className="min-h-screen bg-cyber-black">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/experience" element={<ExperiencePage />} />
-      </Routes>
-      <WhatsAppButton phoneNumber="5491169777846" />
-    </div>
+    <AuthProvider>
+      <ModalProvider>
+        <div className="min-h-screen">
+          <Navbar />
+          <main>
+            <Hero />
+            <Services />
+            <About />
+            <Contact />
+          </main>
+          <Footer />
+          <WhatsAppButton />
+        </div>
+      </ModalProvider>
+    </AuthProvider>
   );
 }
+
+export default App;

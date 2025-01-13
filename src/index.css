@@ -3,21 +3,13 @@
 @tailwind utilities;
 
 body {
-  background-color: #080808;
-  color: #ffffff;
+  background-color: #000;
 }
 
-.text-glow {
-  text-shadow: 0 0 10px currentColor;
+.subtle-glow {
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
 }
 
-.neon-line {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #00F3FF, transparent);
-}
-
-.cyber-grid {
-  background-image: linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
-  background-size: 30px 30px;
+.title-glow {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
 }

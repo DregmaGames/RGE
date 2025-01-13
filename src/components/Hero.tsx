@@ -1,29 +1,34 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 
 export default function Hero() {
+  const { language } = useLanguage();
+  const t = translations[language].hero;
+
   return (
-    <div className="relative min-h-screen flex items-center">
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-900 to-blue-900 opacity-90" />
-      <div className="absolute inset-0" style={{
-        backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80')",
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        zIndex: -1
-      }} />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+    <div id="home" className="relative bg-gradient-to-b from-black to-gray-900 pt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Expertos Globales en Soluciones Integrales
+          <h1 className="text-4xl tracking-tight font-extrabold sm:text-5xl md:text-6xl">
+            <span className="block text-primary title-glow">{t.title}</span>
+            <span className="block text-primary-light">{t.subtitle}</span>
           </h1>
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Liderando la innovación en Comercio Exterior, Ingeniería, Diseño y Capacitación
+          <p className="mt-3 max-w-md mx-auto text-base text-gray-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+            {t.description}
           </p>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full font-medium inline-flex items-center space-x-2 transition-colors">
-            <span>Conoce más</span>
-            <ArrowRight className="h-5 w-5" />
-          </button>
+          <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+            <div className="rounded-md">
+              <a
+                href="#contact"
+                className="w-full flex items-center justify-center px-8 py-3 border border-primary text-base font-medium rounded-md text-primary bg-transparent hover:bg-primary-dark/10 transition-colors duration-300"
+              >
+                {t.cta}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

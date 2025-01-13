@@ -1,51 +1,82 @@
 import React from 'react';
-import { Globe, Cog, Palette, GraduationCap } from 'lucide-react';
+import { Briefcase, Wrench, Palette, GraduationCap } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 
-const services = [
-  {
-    icon: Globe,
-    title: 'Comercio Exterior',
-    description: 'Asesoramiento experto en importación, exportación y logística internacional'
-  },
-  {
-    icon: Cog,
-    title: 'Ingeniería',
-    description: 'Soluciones técnicas innovadoras y desarrollo de proyectos industriales'
-  },
-  {
-    icon: Palette,
-    title: 'Diseño',
-    description: 'Diseño industrial y desarrollo de productos con enfoque en la funcionalidad'
-  },
-  {
-    icon: GraduationCap,
-    title: 'Capacitación',
-    description: 'Programas formativos especializados para profesionales y empresas'
+const getServiceIcon = (title: string) => {
+  switch (title) {
+    case 'Comercio Exterior':
+    case 'Foreign Trade':
+    case 'Commercio Estero':
+    case 'Außenhandel':
+      return Briefcase;
+    case 'Ingeniería':
+    case 'Engineering':
+    case 'Ingegneria':
+    case 'Ingenieurwesen':
+      return Wrench;
+    case 'Diseño':
+    case 'Design':
+      return Palette;
+    case 'Capacitación':
+    case 'Training':
+    case 'Formazione':
+    case 'Schulung':
+      return GraduationCap;
+    default:
+      return Briefcase;
   }
-];
+};
 
 export default function Services() {
+  const { language } = useLanguage();
+  const t = translations[language].services;
+
   return (
-    <section id="services" className="py-20 bg-gray-50">
+    <div id="services" className="py-24 bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Nuestros Servicios</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Ofrecemos soluciones integrales adaptadas a las necesidades de su empresa
+        <div className="text-center">
+          <h2 className="text-3xl font-extrabold text-primary sm:text-4xl title-glow">
+            {t.title}
+          </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-300">
+            {t.subtitle}
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <service.icon className="h-6 w-6 text-blue-600" />
+
+        <div className="mt-20 grid grid-cols-1 gap-8 md:grid-cols-2">
+          {t.items.map((service, index) => {
+            const Icon = getServiceIcon(service.title);
+            return (
+              <div
+                key={index}
+                className="relative bg-black/50 p-8 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors duration-300"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="p-3 bg-gray-900 border border-primary/30 rounded-lg">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-medium text-primary mb-4">
+                      {service.title}
+                    </h3>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, idx) => (
+                        <li key={idx} className="text-gray-300 flex items-start">
+                          <span className="text-primary mr-2">•</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
-              <p className="text-gray-600">{service.description}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
